@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+    <script src="./client.js"></script>
+    <script src="./api/config"></script>  <!-- Loaded via REST API -->
+    <title>DondeEstas</title>
+  </head>
+  <body>
+  
+<div id="usuario">
+	<span>Nombre : </span><input id="nombre"/>
+	<input type="button" onclick="enviar()" value="Enviar" />
+</div>  
+  
+  
+  <div id="console" style="display:none">
+	  <div id="top">Intentando conectar websocket... Por ahora nada... :)</div>
+	  <div id="mid">Tiempo loop: <span id="ping"></span></div>
+	  <div id="clientes"></div>
+  </div>
+  
+  
+  
+    <script>
+    
+    	function enviar(){
+    		var nombre = document.getElementById('nombre').value;
+    		var div_usuario = document.getElementById('usuario');
+    		var div_console = document.getElementById('console');
+    		
+    		div_usuario.style.display = 'none';
+    		div_console.style.display = '';
+    		
+    		/* inicio */
+    		var client = new Client();
+    		client.setName( nombre );
+    		client.connect();
+    	}
+    /*	
+      window.onload = function() {
+        var client = new Client();
+      };
+     */ 
+    </script>
+  </body>
+</html>

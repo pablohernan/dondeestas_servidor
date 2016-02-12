@@ -1,0 +1,41 @@
+{
+  "name": "DondeEstas",
+  "version": "1.1.0",
+  "description": "Geolocalización",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift",
+    "dondeestas",
+    "geolocalizacion"
+  ],
+  "author": {
+    "name": "Pablo Hernan Rapetti",
+    "email": "pablo.hernan.arg@gmail.com",
+    "url":  ""
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+
+  "engines": {
+    "node": ">= 0.12.0",
+    "npm": ">= 1.2.0"
+  },
+
+  "dependencies": {
+    "config-multipaas": "^0.1.0",
+    "restify": "^2.8.3"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js"
+}
