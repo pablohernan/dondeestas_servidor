@@ -1,7 +1,7 @@
 // Check the configuration file for more details
 var config = require('./config');
 
-// Express.js stuff
+// Express.js stuff 
 var express = require('express');
 var app = require('express')();
 var server = require('http').Server(app);
