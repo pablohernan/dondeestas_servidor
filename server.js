@@ -41,14 +41,6 @@ var _STATUS_ACTUALIZADO = 2;
 
 var clientes = [];
 
-/* Busca en un Array de Objetos el atributo X que tenga el valor Y y retorna la posición */
-Array.prototype.ObjectIndexOf = function arrayObjectIndexOf(atributo, valor) {
-    for (var i = 0, len = this.length; i < len; i++) {
-        if (this[i][atributo] === valor) return i;
-    }
-    return -1;
-}	
-
 // And finally some websocket stuff
 io.on('connection', function (socket) { // Incoming connections from clients
   
@@ -75,7 +67,7 @@ io.on('connection', function (socket) { // Incoming connections from clients
 	// Greet the newcomer
 	socket.emit('hello', { id: socket.id });
 	
-	socket.on('setCliente', function (data) { // ping-event from the client to be respond with pong
+	socket.on('setCliente', function (data) { // setCliente -- servidor
 		
 		/* actualizo los datos del cliente en la posición id del array */
 		var index = clientes.ObjectIndexOf('id',socket.id);
@@ -99,9 +91,47 @@ io.on('connection', function (socket) { // Incoming connections from clients
 	
 			
 			console.log(' socket.id ' + socket.id + ' : ' + data.name + ' : ' + data.latitud + ' , ' + data.longitud);
-			socket.emit('getClientes', { pingtime: data.pingtime , clientes: clientesMin}); 
+			if( !timerActive ){
+				console.log('===== Emit =====')
+				socket.emit('getClientes', { pingtime: data.pingtime , clientes: clientesMin}); 
+				startTimer();
+			}
+
 		}
   });
 });
+
+
+
+/* Busca en un Array de Objetos el atributo X que tenga el valor Y y retorna la posición */
+Array.prototype.ObjectIndexOf = function arrayObjectIndexOf(atributo, valor) {
+    for (var i = 0, len = this.length; i < len; i++) {
+        if (this[i][atributo] === valor) return i;
+    }
+    return -1;
+}	
+
+
+
+/* Timer para los Emit */
+var t;
+var timerActive=0;
+
+function timer(){
+	t=setTimeout(stopTimer, config.timeEmit );
+}
+
+function startTimer(){
+if (!timerActive){
+	timerActive=1;
+  	timer();
+  }
+}
+
+function stopTimer(){
+	clearTimeout(t);
+	timerActive=0;
+}
+/* Timer para los Emit */
 
 

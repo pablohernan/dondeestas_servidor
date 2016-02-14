@@ -10,6 +10,8 @@ var Config = {
 
   "heartbeattmo": 1000, // milliseconds 
   
+  "timeEmit": 3000,
+  
   "wsclientopts": { reconnection: true, 
                     reconnectionDelay: 2000,
                     reconnectionAttempts: 100,
